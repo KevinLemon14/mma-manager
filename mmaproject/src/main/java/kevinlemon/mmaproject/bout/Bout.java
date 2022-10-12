@@ -2,34 +2,52 @@ package kevinlemon.mmaproject.bout;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import kevinlemon.mmaproject.fighter.Fighter;
 
 @Entity
 public class Bout {
 
     @Id
     private String id;
-    private String redId;
-    private String redName;
-    private String blueId;
-    private String blueName;
     private String eventId;
     private String winner;
     private String loser;
     private String outcome;
     private String round;
 
+    @ManyToMany
+    private Fighter redFighter;
+    @ManyToMany
+    private Fighter blueFighter;
+
+    public Fighter getRedFighter() {
+        return redFighter;
+    }
+
+    public void setRedFighter(Fighter redFighter) {
+        this.redFighter = redFighter;
+    }
+
+    public Fighter getBlueFighter() {
+        return blueFighter;
+    }
+
+    public void setBlueFighter(Fighter blueFighter) {
+        this.blueFighter = blueFighter;
+    }
+
     public Bout() {
 
     }
 
-    public Bout(String id, String redId, String redName, String blueId, String blueName, String eventId, String winner,
+    public Bout(String id, String redId, String blueId, String eventId, String winner,
             String loser, String outcome, String round) {
         super();
         this.id = id;
-        this.redId = redId;
-        this.redName = redName;
-        this.blueId = blueId;
-        this.blueName = blueName;
+        this.redFighter = new Fighter(redId, "", 0, "");
+        this.blueFighter = new Fighter(blueId, "", 0, "");
         this.eventId = eventId;
         this.winner = winner;
         this.loser = loser;
@@ -43,38 +61,6 @@ public class Bout {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getRedId() {
-        return redId;
-    }
-
-    public void setRedId(String redId) {
-        this.redId = redId;
-    }
-
-    public String getRedName() {
-        return redName;
-    }
-
-    public void setRedName(String redName) {
-        this.redName = redName;
-    }
-
-    public String getBlueId() {
-        return blueId;
-    }
-
-    public void setBlueId(String blueId) {
-        this.blueId = blueId;
-    }
-
-    public String getBlueName() {
-        return blueName;
-    }
-
-    public void setBlueName(String blueName) {
-        this.blueName = blueName;
     }
 
     public String getEventId() {
